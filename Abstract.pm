@@ -3,8 +3,9 @@ package Maypole::Authentication::Abstract;
 use strict;
 use Apache::Cookie;
 use Storable qw(freeze thaw);
+use URI;
 
-our $VERSION = '0.5';
+our $VERSION = '0.6';
 
 =head1 NAME
 
@@ -12,7 +13,8 @@ Maypole::Authentication::Abstract - Abstract Authentication for Maypole
 
 =head1 SYNOPSIS
 
-    # Simple example of all three security levels
+Simple example of all three security levels:
+
     use base qw(Apache::MVC Maypole::Authentication::Abstract);
 
     sub authenticate {
@@ -30,7 +32,8 @@ Maypole::Authentication::Abstract - Abstract Authentication for Maypole
         }
     }
 
-    # Another example
+Another example:
+
     use base qw(Apache::MVC Maypole::Authentication::Abstract);
 
     MyApp->config->{auth} = {
@@ -60,10 +63,12 @@ Maypole::Authentication::Abstract - Abstract Authentication for Maypole
         }
     }
 
-    # Tickets in templates
+Tickets in templates
+
     <INPUT TYPE="hidden" NAME="ticket" VALUE="[% ticket %]">
 
-    # Global session handling is also possible
+Global session handling is also possible:
+
     sub authenticate {
         my $r = shift;
         $r->public;
@@ -253,7 +258,7 @@ whenever it is called.
 By default the ticket is just a serialized array represented as hex string
 containing the user and the password, but it is very simple to overload
 C<ticket> with a better method. Use a Crypt:: module or even Kerberos!
-It also sets C<$r->{template_args}{ticket}>.
+It also sets $r->{template_args}{ticket}.
 
 =cut
 
@@ -291,7 +296,7 @@ sub _login_cookie {
         -name    => $cookie_name,
         -value   => $r->{session_id},
         -expires => $r->config->{auth}{cookie_expiry} || '',
-        -path    => "/"
+        -path    => URI->new( $r->config->{base_uri} )->path
     );
     $cookie->bake;
 }
@@ -303,7 +308,7 @@ sub _logout_cookie {
         $r->{ar},
         -name    => $cookie_name,
         -value   => undef,
-        -path    => "/",
+        -path    => URI->new( $r->config->{base_uri} )->path,
         -expires => "-10m"
     );
     $cookie->bake;
@@ -320,6 +325,9 @@ Sebastian Riedel, C<sri@cpan.org>
 =head1 COPYRIGHT
 
 Copyright 2004 Sebastian Riedel. All rights reserved.
+
+This program is free software, you can redistribute it and/or modify it
+under the same terms as Perl itself.
 
 =cut
 

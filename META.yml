@@ -1,10 +1,11 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         Maypole-Authentication-Abstract
-version:      0.5
+version:      0.6
 version_from: Abstract.pm
 installdirs:  site
 requires:
+    URI:                           0
 
 distribution_type: module
 generated_by: ExtUtils::MakeMaker version 6.17

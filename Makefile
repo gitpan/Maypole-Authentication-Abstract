@@ -12,6 +12,7 @@
 
 #     AUTHOR => q[Sebastian Riedel (sri@oook.de)]
 #     NAME => q[Maypole::Authentication::Abstract]
+#     PREREQ_PM => { URI=>q[0] }
 #     VERSION_FROM => q[Abstract.pm]
 
 # --- MakeMaker post_initialize section:
@@ -51,11 +52,11 @@ AR_STATIC_ARGS = cr
 DIRFILESEP = /
 NAME = Maypole::Authentication::Abstract
 NAME_SYM = Maypole_Authentication_Abstract
-VERSION = 0.5
+VERSION = 0.6
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_5
+VERSION_SYM = 0_6
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.5
+XS_VERSION = 0.6
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -236,7 +237,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Maypole-Authentication-Abstract
-DISTVNAME = Maypole-Authentication-Abstract-0.5
+DISTVNAME = Maypole-Authentication-Abstract-0.6
 
 
 # --- MakeMaker macro section:
@@ -429,10 +430,11 @@ metafile :
 	$(NOECHO) $(ECHO) '# http://module-build.sourceforge.net/META-spec.html' > META.yml
 	$(NOECHO) $(ECHO) '#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#' >> META.yml
 	$(NOECHO) $(ECHO) 'name:         Maypole-Authentication-Abstract' >> META.yml
-	$(NOECHO) $(ECHO) 'version:      0.5' >> META.yml
+	$(NOECHO) $(ECHO) 'version:      0.6' >> META.yml
 	$(NOECHO) $(ECHO) 'version_from: Abstract.pm' >> META.yml
 	$(NOECHO) $(ECHO) 'installdirs:  site' >> META.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META.yml
+	$(NOECHO) $(ECHO) '    URI:                           0' >> META.yml
 	$(NOECHO) $(ECHO) '' >> META.yml
 	$(NOECHO) $(ECHO) 'distribution_type: module' >> META.yml
 	$(NOECHO) $(ECHO) 'generated_by: ExtUtils::MakeMaker version 6.17' >> META.yml
@@ -675,11 +677,12 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd:
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,5,0,0">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,6,0,0">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <TITLE>$(DISTNAME)</TITLE>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>Sebastian Riedel (sri@oook.de)</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <DEPENDENCY NAME="URI" VERSION="0,0,0,0" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <OS NAME="$(OSNAME)" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i386-linux-thread-multi" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
