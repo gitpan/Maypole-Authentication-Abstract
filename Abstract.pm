@@ -4,7 +4,7 @@ use strict;
 use Apache::Cookie;
 use Storable qw(freeze thaw);
 
-our $VERSION = '0.4';
+our $VERSION = '0.5';
 
 =head1 NAME
 
@@ -62,6 +62,20 @@ Maypole::Authentication::Abstract - Abstract Authentication for Maypole
 
     # Tickets in templates
     <INPUT TYPE="hidden" NAME="ticket" VALUE="[% ticket %]">
+
+    # Global session handling is also possible
+    sub authenticate {
+        my $r = shift;
+        $r->public;
+        if ( $r->{table} eq 'products' && $r->{action} eq 'search' ) {
+            $r->private;
+            $r->{template} = 'login' unless $r->{user};
+        }
+        elsif ( $r->{table} eq 'products' && $r->{action} eq 'edit' ) {
+            $r->restricted;
+            $r->{template} = 'login' unless $r->{user};
+        }
+    }
 
 =head1 DESCRIPTION
 
@@ -142,7 +156,8 @@ It also sets C<$r->{template_args}{session_id}>.
 =cut
 
 sub login {
-    my $r                 = shift;
+    my $r = shift;
+    return 1 if $r->{session};    # We already have a session
     my %jar               = Apache::Cookie->new( $r->{ar} )->parse;
     my $cookie_name       = $r->config->{auth}{cookie_name} || "sessionid";
     my $cookie_session_id = $jar{$cookie_name}->value
@@ -164,7 +179,7 @@ sub login {
         $r->_logout_cookie;
         return 0;
     }
-    $r->{session_id} = $r->{session}->{_session_id};
+    $r->{session_id} = $r->{session}{_session_id};
     $r->{template_args}{session_id} = $r->{session_id};
     $r->_login_cookie
       if ( ( !$session_id && !$cookie_session_id )

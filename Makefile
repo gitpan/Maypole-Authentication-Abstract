@@ -51,11 +51,11 @@ AR_STATIC_ARGS = cr
 DIRFILESEP = /
 NAME = Maypole::Authentication::Abstract
 NAME_SYM = Maypole_Authentication_Abstract
-VERSION = 0.4
+VERSION = 0.5
 VERSION_MACRO = VERSION
-VERSION_SYM = 0_4
+VERSION_SYM = 0_5
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 0.4
+XS_VERSION = 0.5
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -236,7 +236,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Maypole-Authentication-Abstract
-DISTVNAME = Maypole-Authentication-Abstract-0.4
+DISTVNAME = Maypole-Authentication-Abstract-0.5
 
 
 # --- MakeMaker macro section:
@@ -429,7 +429,7 @@ metafile :
 	$(NOECHO) $(ECHO) '# http://module-build.sourceforge.net/META-spec.html' > META.yml
 	$(NOECHO) $(ECHO) '#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#' >> META.yml
 	$(NOECHO) $(ECHO) 'name:         Maypole-Authentication-Abstract' >> META.yml
-	$(NOECHO) $(ECHO) 'version:      0.4' >> META.yml
+	$(NOECHO) $(ECHO) 'version:      0.5' >> META.yml
 	$(NOECHO) $(ECHO) 'version_from: Abstract.pm' >> META.yml
 	$(NOECHO) $(ECHO) 'installdirs:  site' >> META.yml
 	$(NOECHO) $(ECHO) 'requires:' >> META.yml
@@ -675,7 +675,7 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd:
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,4,0,0">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="0,5,0,0">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <TITLE>$(DISTNAME)</TITLE>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <AUTHOR>Sebastian Riedel (sri@oook.de)</AUTHOR>' >> $(DISTNAME).ppd
